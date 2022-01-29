@@ -1,0 +1,158 @@
+https://studiomeal.com/archives/197
+
+1.Flex
+
+Flex items in Flex Container
+    item과 container에 적용할 수 있는 속성이 따로 있다고 생각
+
+Container 적용 속성
+    display:flex, inline-flex(inline-block처럼 동작)
+
+    main-axis, cross-axis
+
+    default 
+        main-axis : 가로방향,
+        weight : item에 따라
+        height : Container의 height 만큼
+
+    flex-direction
+        row, column, row-reverse, column-reverse
+    
+    flex-wrap
+        container가 더 이상 아이템들을 한 줄에 담을 여유가 없을 때 줄바꿈 방법
+        nowrap : item places even if out of container
+        wrap : at the new line
+        wrap-reverse : wrap from bottom to top
+
+    flex-flow
+        flex-direction, flex-wrap 한꺼번에 지정
+        flex-flow : row wrap
+
+    justify-content
+        main-axis 방향으로 아이템들을 정렬
+        flex-start : container의 시작점으로 정렬
+        flex-end : container의 끝점으로 정렬
+        flex-center : container들을 가운데로 정렬
+        space-between : item들 사이에 균일한 간격 만듦
+        space-around : 둘레에 균일한 간격을 만들어 줌
+            https://studiomeal.com/wp-content/uploads/2020/01/10-1.jpg
+
+    align-items
+        cross-axis방향으로 아이템들을 정렬
+        stretch : height를 container만큼
+        flex-start : 시작점으로 정렬
+        flex-end : 끝점으로 정렬
+        center : 가운데
+        baseline : item안의 text의 baseline기준 정렬
+            https://studiomeal.com/wp-content/uploads/2020/01/11.
+            
+    align-content
+        flex-wrap:wrap;이 설정된 상태에서, 아이템들의 행이 2줄 이상 되었을 때, 수직축 방향 정렬
+
+
+Item 적용 속성
+    flex-basis
+        (축에 따라)item의 기본 크기를 설정(direction : row면, width)
+        auto : content의 크기(default)
+        flex-basis : 100px
+            content<100px : width = 100px까지 늘어남
+            content>100px : width = content크기 만큼 
+        width : 100px
+            그냥 다 100px 고정
+        
+    flex-grow
+        유연하게 늘리기
+        아이템이 flex-basis 값보다 커질 수 있는지 결정
+        해당 아이템이 유연한 아이템으로 바뀜
+        default : 0
+        아이템들이 flex-basis를 제외한 여백 부분을 flex-grow에 지정된 숫자의 비율로 나누어가짐
+    
+    flex-shrink
+        유연하게 줄이기
+        아이템이 flex-basis보다 작아질 수 있는지 결정
+        default : 1
+        0보다 큰 값이면, 줄어들 때 flex-basis보다 작아짐
+    
+    flex : flex-grow flex shrink flex-basis;
+
+    align-self
+        해당 아이템의 수직축 방향 정렬
+        기본값은 auto, align-items 설정 상속 받음
+        align-items보다 우선권
+        마찬가지로, auto,stretch, flex-start, flex-end, center,baseline
+    
+    order
+        배치 순서
+        작은 숫자일 수록 먼저 배치
+        시각적 순서일 뿐, HTML의 배치를 바꾼 것이 아니니, 사용은 자제
+        차라리 HTML 배치를 바꾸는게..
+    
+    z-index
+        Z축 정렬, 숫자가 클수록 위로 올라옴
+        주로, layer를 나눌 때 사용
+
+
+2.Grid
+https://studiomeal.com/wp-content/uploads/2020/01/03-2.jpg
+
+grid container, grid item, grid cell, grid gap, grid area, grid line,...
+
+grid Container
+    grid를 적용하는 grid 전체 영역
+
+grid Item
+    grid 컨테이너의 자식 요소들
+
+grid cell
+    grid의 한 칸, grid cell안에 grid item이 들어가 있음
+    grid item 하나가 들어가는 가상의 틀
+
+grid line
+    grid cell 구분선
+
+grid gap
+    grid cell 사이 간격
+
+grid 형태 정의
+    grid-template-rows
+        row 배치
+    grid-template-columns
+        column 배치
+
+    ex)
+    .container {
+	grid-template-columns: 200px 200px 500px;
+	/* grid-template-columns: 1fr 1fr 1fr */
+	/* grid-template-columns: repeat(3, 1fr) */
+	/* grid-template-columns: 200px 1fr */
+	/* grid-template-columns: 100px 200px auto */
+
+	grid-template-rows: 200px 200px 500px;
+	/* grid-template-rows: 1fr 1fr 1fr */
+	/* grid-template-rows: repeat(3, 1fr) */
+	/* grid-template-rows: 200px 1fr */
+	/* grid-template-rows: 100px 200px auto */
+    }
+
+    fr : 비율 (1:1:1) 1fr 1fr하면 1:1 2개 grid
+    repeat(3,1fr) == 1fr 1fr 1fr
+    auto : 자동으로 끝까지 늘어나게
+    minmax(100px,auto) : min 100px, max auto
+
+
+    auto-fill, auto-fit
+        개수를 정하지 않고 설정된 너비가 허용하는 한 최대한 셀 채움
+        
+        auto-fill
+            크기를 20%으로 설정하면 채울 수 있는 최대로 채움(4개)
+            빈 공간 냅둠
+        auto-fit
+            마찬가지인데 빈공간을 채움
+
+
+grid 셀 사이 간격 설정
+    row-gap, column-gap
+        gap: 10px 20px;
+	    /* row-gap: 10px; column-gap: 20px; */
+        gap: 20px;
+	    /* row-gap: 20px; column-gap: 20px; */
